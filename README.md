@@ -37,13 +37,6 @@ This release copy is prepared for open-source publishing.
 4. Add your own AI provider API key and model.
 5. Configure triggers, chat behavior, and content settings.
 
-## Security Notes
-
-- Do not commit real AI provider keys.
-- Do not commit private customer conversations or exports.
-- Do not commit production `wp-config.php` files.
-- Keep webhook secrets and external service credentials in environment variables or server config.
-
 ## Monetization Model
 
 The plugin core is free and open source. Paid work can be offered separately for installation, custom automations, WooCommerce/CRM/webhook integrations, and support.
