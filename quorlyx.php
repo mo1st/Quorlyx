@@ -2,11 +2,12 @@
 /**
  * Plugin Name:       Quorlyx
  * Description:       Free open-source AI chatbot and behavior automation plugin for WordPress and WooCommerce.
- * Version:           2.2.3
+ * Version:           2.2.4
  * Author:            Quorlyx
  * Author URI:        https://quorlyx.dev
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Update URI:        https://github.com/mo1st/Quorlyx/
  *
  * @package Quorlyx
  */
@@ -158,6 +159,356 @@ define( 'QUORLYX_RATELIMIT_RETRY_DELAY', 10 ); // Delay in seconds for a 429 err
 if ( ! defined( 'QUORLYX_ADMIN_CAPABILITY' ) ) {
 	define( 'QUORLYX_ADMIN_CAPABILITY', 'manage_quorlyx' );
 }
+if ( ! defined( 'QUORLYX_VERSION' ) ) {
+	define( 'QUORLYX_VERSION', '2.2.4' );
+}
+if ( ! defined( 'QUORLYX_GITHUB_REPOSITORY' ) ) {
+	define( 'QUORLYX_GITHUB_REPOSITORY', 'mo1st/Quorlyx' );
+}
+if ( ! defined( 'QUORLYX_GITHUB_REPOSITORY_URL' ) ) {
+	define( 'QUORLYX_GITHUB_REPOSITORY_URL', 'https://github.com/mo1st/Quorlyx/' );
+}
+if ( ! defined( 'QUORLYX_GITHUB_RELEASES_API_URL' ) ) {
+	define( 'QUORLYX_GITHUB_RELEASES_API_URL', 'https://api.github.com/repos/mo1st/Quorlyx/releases/latest' );
+}
+if ( ! defined( 'QUORLYX_GITHUB_RELEASE_CACHE_TTL' ) ) {
+	define( 'QUORLYX_GITHUB_RELEASE_CACHE_TTL', 30 * MINUTE_IN_SECONDS );
+}
+
+if ( ! function_exists( 'quorlyx_github_normalize_version' ) ) {
+	/**
+	 * Normalizes a GitHub release tag into a WordPress-compatible version string.
+	 *
+	 * @param string $version Raw release tag or version.
+	 * @return string
+	 */
+	function quorlyx_github_normalize_version( $version ) {
+		$version = trim( (string) $version );
+		$version = preg_replace( '/^[^\d]*/', '', $version );
+		$version = preg_replace( '/[^0-9A-Za-z.+-].*$/', '', (string) $version );
+
+		return '' !== $version ? $version : '0.0.0';
+	}
+}
+
+if ( ! function_exists( 'quorlyx_github_get_release_package_url' ) ) {
+	/**
+	 * Selects the best installable ZIP URL from a GitHub release payload.
+	 *
+	 * @param array<string,mixed> $release GitHub release payload.
+	 * @return string
+	 */
+	function quorlyx_github_get_release_package_url( $release ) {
+		$fallback_zip = '';
+		$assets       = isset( $release['assets'] ) && is_array( $release['assets'] ) ? $release['assets'] : array();
+
+		foreach ( $assets as $asset ) {
+			if ( ! is_array( $asset ) ) {
+				continue;
+			}
+
+			$name = strtolower( (string) ( $asset['name'] ?? '' ) );
+			$url  = (string) ( $asset['browser_download_url'] ?? '' );
+
+			if ( '' === $url || '.zip' !== substr( $name, -4 ) ) {
+				continue;
+			}
+
+			if ( '' === $fallback_zip ) {
+				$fallback_zip = $url;
+			}
+
+			if ( false !== strpos( $name, 'quorlyx' ) ) {
+				return esc_url_raw( $url );
+			}
+		}
+
+		if ( '' !== $fallback_zip ) {
+			return esc_url_raw( $fallback_zip );
+		}
+
+		return esc_url_raw( (string) ( $release['zipball_url'] ?? '' ) );
+	}
+}
+
+if ( ! function_exists( 'quorlyx_github_get_latest_release' ) ) {
+	/**
+	 * Fetches the latest public GitHub release used by the WordPress updater.
+	 *
+	 * @param bool $force_refresh Whether to bypass the local release cache.
+	 * @return array<string,string>|false
+	 */
+	function quorlyx_github_get_latest_release( $force_refresh = false ) {
+		$cache_key = 'quorlyx_github_latest_release';
+
+		if ( ! $force_refresh ) {
+			$cached = get_site_transient( $cache_key );
+			if ( is_array( $cached ) && ! empty( $cached['version'] ) && ! empty( $cached['package'] ) ) {
+				return $cached;
+			}
+		}
+
+		$response = wp_remote_get(
+			QUORLYX_GITHUB_RELEASES_API_URL,
+			array(
+				'timeout' => 15,
+				'headers' => array(
+					'Accept'     => 'application/vnd.github+json',
+					'User-Agent' => 'Quorlyx/' . QUORLYX_VERSION . ' (https://quorlyx.dev)',
+				),
+			)
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$status_code = (int) wp_remote_retrieve_response_code( $response );
+		if ( $status_code < 200 || $status_code >= 300 ) {
+			return false;
+		}
+
+		$release = json_decode( wp_remote_retrieve_body( $response ), true );
+		if ( ! is_array( $release ) ) {
+			return false;
+		}
+
+		$version = quorlyx_github_normalize_version( (string) ( $release['tag_name'] ?? $release['name'] ?? '' ) );
+		$package = quorlyx_github_get_release_package_url( $release );
+
+		if ( '0.0.0' === $version || '' === $package ) {
+			return false;
+		}
+
+		$latest_release = array(
+			'version'      => sanitize_text_field( $version ),
+			'name'         => sanitize_text_field( (string) ( $release['name'] ?? $release['tag_name'] ?? 'Quorlyx release' ) ),
+			'tag_name'     => sanitize_text_field( (string) ( $release['tag_name'] ?? '' ) ),
+			'html_url'     => esc_url_raw( (string) ( $release['html_url'] ?? QUORLYX_GITHUB_REPOSITORY_URL ) ),
+			'package'      => $package,
+			'published_at' => sanitize_text_field( (string) ( $release['published_at'] ?? '' ) ),
+			'body'         => wp_kses_post( (string) ( $release['body'] ?? '' ) ),
+		);
+
+		set_site_transient( $cache_key, $latest_release, QUORLYX_GITHUB_RELEASE_CACHE_TTL );
+
+		return $latest_release;
+	}
+}
+
+if ( ! function_exists( 'quorlyx_github_get_update_object' ) ) {
+	/**
+	 * Builds the update object expected by WordPress core.
+	 *
+	 * @param array<string,string> $release GitHub release metadata.
+	 * @return object
+	 */
+	function quorlyx_github_get_update_object( $release ) {
+		return (object) array(
+			'id'            => QUORLYX_GITHUB_REPOSITORY_URL,
+			'slug'          => 'quorlyx',
+			'plugin'        => plugin_basename( __FILE__ ),
+			'new_version'   => $release['version'],
+			'url'           => $release['html_url'],
+			'package'       => $release['package'],
+			'requires'      => '6.0',
+			'tested'        => get_bloginfo( 'version' ),
+			'requires_php'  => '7.4',
+			'icons'         => array(
+				'1x' => plugins_url( 'assets/logo.png', __FILE__ ),
+				'2x' => plugins_url( 'assets/logo.png', __FILE__ ),
+			),
+			'banners'       => array(),
+			'banners_rtl'   => array(),
+			'upgrade_notice' => ! empty( $release['name'] ) ? $release['name'] : 'A new Quorlyx release is available from GitHub.',
+		);
+	}
+}
+
+if ( ! function_exists( 'quorlyx_github_update_check' ) ) {
+	/**
+	 * Adds GitHub release updates to the normal WordPress plugin update screen.
+	 *
+	 * @param object $transient WordPress update transient.
+	 * @return object
+	 */
+	function quorlyx_github_update_check( $transient ) {
+		if ( ! is_object( $transient ) ) {
+			return $transient;
+		}
+
+		$plugin_file     = plugin_basename( __FILE__ );
+		$current_version = isset( $transient->checked[ $plugin_file ] ) ? $transient->checked[ $plugin_file ] : QUORLYX_VERSION;
+		$release         = quorlyx_github_get_latest_release();
+
+		if ( ! is_array( $release ) || empty( $release['version'] ) ) {
+			return $transient;
+		}
+
+		$update = quorlyx_github_get_update_object( $release );
+
+		if ( version_compare( $release['version'], $current_version, '>' ) ) {
+			$transient->response[ $plugin_file ] = $update;
+		} else {
+			$transient->no_update[ $plugin_file ] = $update;
+		}
+
+		return $transient;
+	}
+}
+
+if ( ! function_exists( 'quorlyx_github_plugins_api' ) ) {
+	/**
+	 * Provides plugin details for the "View version details" modal.
+	 *
+	 * @param false|object|array $result Current API result.
+	 * @param string             $action Plugin API action.
+	 * @param object             $args   API args.
+	 * @return false|object|array
+	 */
+	function quorlyx_github_plugins_api( $result, $action, $args ) {
+		if ( 'plugin_information' !== $action || empty( $args->slug ) || 'quorlyx' !== $args->slug ) {
+			return $result;
+		}
+
+		$release = quorlyx_github_get_latest_release();
+		if ( ! is_array( $release ) ) {
+			return $result;
+		}
+
+		$changelog = '' !== trim( $release['body'] ) ? wpautop( $release['body'] ) : '<p>See the GitHub release page for release notes.</p>';
+
+		return (object) array(
+			'name'          => 'Quorlyx',
+			'slug'          => 'quorlyx',
+			'version'       => $release['version'],
+			'author'        => '<a href="https://quorlyx.dev">Quorlyx</a>',
+			'homepage'      => QUORLYX_GITHUB_REPOSITORY_URL,
+			'requires'      => '6.0',
+			'tested'        => get_bloginfo( 'version' ),
+			'requires_php'  => '7.4',
+			'download_link' => $release['package'],
+			'last_updated'  => $release['published_at'],
+			'sections'      => array(
+				'description' => '<p>Free open-source AI chatbot and behavior automation plugin for WordPress and WooCommerce.</p>',
+				'changelog'   => $changelog,
+			),
+		);
+	}
+}
+
+if ( ! function_exists( 'quorlyx_github_handle_manual_update_check' ) ) {
+	/**
+	 * Allows admins to force a fresh GitHub release check from the plugin row.
+	 *
+	 * @return void
+	 */
+	function quorlyx_github_handle_manual_update_check() {
+		if ( empty( $_GET['quorlyx_github_check_updates'] ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			wp_die( esc_html__( 'You do not have permission to check plugin updates.', 'quorlyx' ) );
+		}
+
+		check_admin_referer( 'quorlyx_github_check_updates' );
+
+		delete_site_transient( 'quorlyx_github_latest_release' );
+		delete_site_transient( 'update_plugins' );
+		wp_update_plugins();
+
+		wp_safe_redirect( add_query_arg( 'quorlyx_github_checked', '1', admin_url( 'plugins.php' ) ) );
+		exit;
+	}
+}
+
+if ( ! function_exists( 'quorlyx_github_update_check_notice' ) ) {
+	/**
+	 * Shows a confirmation after a manual GitHub update check.
+	 *
+	 * @return void
+	 */
+	function quorlyx_github_update_check_notice() {
+		if ( empty( $_GET['quorlyx_github_checked'] ) || ! current_user_can( 'update_plugins' ) ) {
+			return;
+		}
+		?>
+		<div class="notice notice-success is-dismissible">
+			<p><?php esc_html_e( 'Quorlyx checked GitHub for the latest release.', 'quorlyx' ); ?></p>
+		</div>
+		<?php
+	}
+}
+
+if ( ! function_exists( 'quorlyx_github_plugin_action_links' ) ) {
+	/**
+	 * Adds a manual GitHub update check link to the plugin row.
+	 *
+	 * @param array<string,string> $links Plugin action links.
+	 * @return array<string,string>
+	 */
+	function quorlyx_github_plugin_action_links( $links ) {
+		if ( current_user_can( 'update_plugins' ) ) {
+			$check_url = wp_nonce_url(
+				add_query_arg( 'quorlyx_github_check_updates', '1', admin_url( 'plugins.php' ) ),
+				'quorlyx_github_check_updates'
+			);
+
+			$links['quorlyx_github_check_updates'] = '<a href="' . esc_url( $check_url ) . '">' . esc_html__( 'Check GitHub updates', 'quorlyx' ) . '</a>';
+		}
+
+		return $links;
+	}
+}
+
+if ( ! function_exists( 'quorlyx_github_fix_update_source_folder' ) ) {
+	/**
+	 * Renames GitHub source ZIP folders so WordPress installs the plugin as /quorlyx/.
+	 *
+	 * @param string      $source        Extracted source path.
+	 * @param string      $remote_source Remote source path.
+	 * @param WP_Upgrader $upgrader      Upgrader instance.
+	 * @param array       $hook_extra    Extra update context.
+	 * @return string
+	 */
+	function quorlyx_github_fix_update_source_folder( $source, $remote_source, $upgrader, $hook_extra = array() ) {
+		unset( $upgrader );
+
+		if ( empty( $hook_extra['plugin'] ) || plugin_basename( __FILE__ ) !== $hook_extra['plugin'] ) {
+			return $source;
+		}
+
+		global $wp_filesystem;
+
+		if ( ! $wp_filesystem || empty( $remote_source ) ) {
+			return $source;
+		}
+
+		$desired_source = trailingslashit( $remote_source ) . 'quorlyx/';
+
+		if ( untrailingslashit( $source ) === untrailingslashit( $desired_source ) ) {
+			return $source;
+		}
+
+		if ( $wp_filesystem->exists( $desired_source ) ) {
+			$wp_filesystem->delete( $desired_source, true );
+		}
+
+		if ( $wp_filesystem->move( $source, $desired_source, true ) ) {
+			return $desired_source;
+		}
+
+		return $source;
+	}
+}
+
+add_filter( 'pre_set_site_transient_update_plugins', 'quorlyx_github_update_check' );
+add_filter( 'plugins_api', 'quorlyx_github_plugins_api', 10, 3 );
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'quorlyx_github_plugin_action_links' );
+add_filter( 'upgrader_source_selection', 'quorlyx_github_fix_update_source_folder', 10, 4 );
+add_action( 'admin_init', 'quorlyx_github_handle_manual_update_check' );
+add_action( 'admin_notices', 'quorlyx_github_update_check_notice' );
 
 if ( ! function_exists( 'quorlyx_mask_secret_for_display' ) ) {
 	/**

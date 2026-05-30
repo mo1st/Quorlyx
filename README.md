@@ -292,3 +292,25 @@ Quorlyx is free and open source under GPL-2.0-or-later. The plugin core is avail
 3. Open **Quorlyx > Settings**.
 4. Add your own AI provider API key and model.
 5. Configure chat behavior, Knowledge Base sources, triggers, goals, and optional content tools.
+
+## Updates From GitHub
+
+Quorlyx includes a GitHub update bridge for self-hosted open-source installs.
+
+- WordPress checks the latest public GitHub release from `https://github.com/mo1st/Quorlyx/`.
+- Available releases appear in the normal WordPress **Dashboard > Updates** and **Plugins** screens.
+- Admins can use the **Check GitHub updates** plugin-row action to force a fresh release check.
+- GitHub source ZIP folders are normalized during upgrade so the plugin stays installed as `wp-content/plugins/quorlyx/`.
+
+To publish a new update:
+
+1. Update the plugin header `Version` and the `QUORLYX_VERSION` constant in `quorlyx.php`.
+2. Commit and push the change to GitHub.
+3. Create a GitHub release tag such as `v2.2.5`.
+4. WordPress sites with Quorlyx installed will discover the release during the next plugin update check.
+
+## Install Counts And Domains
+
+GitHub webhooks are not a replacement for plugin install analytics. A GitHub webhook sends repository events to an external server URL; it does not receive pings from WordPress sites and it cannot tell how many domains have installed the plugin.
+
+If Quorlyx needs install counts or domain reporting, use a Quorlyx-owned endpoint such as `https://quorlyx.dev/wp-json/quorlyx/v1/install` and make reporting explicit in the WordPress admin. A responsible telemetry flow should be opt-in, explain what is sent, and avoid sending API keys, conversations, customer data, or private settings.
