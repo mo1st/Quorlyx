@@ -1,0 +1,641 @@
+.quorlyx-seo-improvement-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.quorlyx-seo-improvement-controls,
+.quorlyx-seo-suggestion-panel {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+    padding: 14px;
+}
+.quorlyx-seo-improvement-filter-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: start;
+}
+.quorlyx-seo-improvement-filter-row > * {
+    min-width: 0;
+}
+.quorlyx-seo-improvement-target-panel {
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    overflow: hidden;
+}
+.quorlyx-seo-improvement-target-panel-header {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f8fafc;
+}
+.quorlyx-seo-improvement-target-panel-header h5 {
+    margin: 0 0 4px;
+    font-size: 14px;
+}
+.quorlyx-seo-improvement-target-panel-header .description {
+    margin: 0;
+}
+.quorlyx-seo-improvement-targets {
+    max-height: 440px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px;
+    background: #fff;
+    scroll-behavior: smooth;
+}
+.quorlyx-seo-improvement-static-option,
+.quorlyx-seo-improvement-target-option {
+    display: block;
+    margin-bottom: 8px;
+}
+.quorlyx-seo-improvement-static-option {
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+}
+.quorlyx-seo-improvement-target-option {
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: #f6f7f7;
+    border: 1px solid #e5e7eb;
+}
+.quorlyx-seo-improvement-target-option input,
+.quorlyx-seo-improvement-static-option input {
+    margin-right: 8px;
+}
+.quorlyx-seo-improvement-target-label {
+    font-weight: 500;
+}
+.quorlyx-seo-improvement-target-badges,
+.quorlyx-seo-suggestion-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-left: 8px;
+}
+.quorlyx-seo-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #edf2f7;
+    color: #334155;
+    font-size: 11px;
+    font-weight: 600;
+}
+.quorlyx-seo-badge-success {
+    background: #dcfce7;
+    color: #166534;
+}
+.quorlyx-seo-improvement-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+.quorlyx-seo-suggestion-panel-header h5 {
+    margin: 0 0 6px;
+    font-size: 14px;
+}
+.quorlyx-seo-suggestion-list {
+    display: grid;
+    gap: 12px;
+}
+.quorlyx-seo-suggestion-empty {
+    padding: 18px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    text-align: center;
+    color: #64748b;
+    background: #f8fafc;
+}
+.quorlyx-seo-suggestion-card {
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+}
+.quorlyx-seo-suggestion-card-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-bottom: 1px solid #f0f0f1;
+    background: #f8fafc;
+}
+.quorlyx-seo-suggestion-card-header h6 {
+    margin: 0 0 6px;
+    font-size: 13px;
+}
+.quorlyx-seo-suggestion-meta {
+    flex-shrink: 0;
+}
+.quorlyx-seo-suggestion-link {
+    font-size: 12px;
+}
+.quorlyx-seo-suggestion-card-body {
+    padding: 14px;
+    max-height: 260px;
+    overflow: auto;
+    line-height: 1.6;
+}
+.quorlyx-seo-suggestion-card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 0 14px 14px;
+}
+@media (max-width: 960px) {
+    .quorlyx-seo-improvement-filter-row {
+        grid-template-columns: 1fr;
+    }
+}
+.quorlyx-settings-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.quorlyx-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+.quorlyx-page-header .quorlyx-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+.quorlyx-page-header .quorlyx-brand img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.quorlyx-page-header .quorlyx-titles {
+    min-width: 0;
+}
+.quorlyx-page-header .quorlyx-titles h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #1d2327;
+    line-height: 1.2;
+    text-align: left !important;
+}
+.quorlyx-page-header .quorlyx-titles .subtitle {
+    margin: 2px 0 0;
+    color: #50575e;
+}
+.quorlyx-settings-actions,
+.quorlyx-dashboard-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.quorlyx-settings-wrap h1.wp-heading-inline,
+.quorlyx-settings-wrap h2,
+.quorlyx-settings-wrap h3,
+.quorlyx-settings-wrap h4,
+#quorlyx-keyword-generator-wrap h4,
+#quorlyx-manual-post-generator-wrap h4,
+.postbox h4 {
+    text-align: center !important;
+    margin: 0 auto 10px !important;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+/* Collapsible headings (e.g., Advanced Appearance) */
+.quorlyx-collapsible-header .quorlyx-collapsible-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    cursor: pointer;
+    user-select: none;
+}
+.quorlyx-collapsible-header .quorlyx-collapsible-toggle:focus {
+    outline: 2px solid #7c3aed;
+    outline-offset: 2px;
+}
+.quorlyx-collapsible-header .toggle-arrow {
+    flex: 0 0 auto;
+}
+.settings-main-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.settings-variation-wrap {
+    background: linear-gradient(#fff, #f9fafb);
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 15px !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+    box-sizing: border-box;
+}
+#variation_b_wrap {
+    display: none;
+}
+#variation_b_wrap.active {
+    display: block;
+}
+.quorlyx-settings-wrap input[type="text"],
+.quorlyx-settings-wrap input[type="password"],
+.quorlyx-settings-wrap input[type="url"],
+.quorlyx-settings-wrap input[type="email"],
+.quorlyx-settings-wrap input[type="number"],
+.quorlyx-settings-wrap textarea,
+.quorlyx-settings-wrap select {
+    width: 100% !important;
+    max-width: 100%;
+    padding: 8px !important;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #1d2327;
+}
+#quorlyx_generate_post_now_button,
+#quorlyx_generate_keywords_button {
+    padding: 8px 16px !important;
+    border-radius: 4px;
+    background: linear-gradient(#7c3aed, #6b21a8);
+    color: #fff;
+    font-weight: 600;
+    transition: transform .2s ease, opacity .2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+}
+#quorlyx_generate_post_now_button:hover,
+#quorlyx_generate_keywords_button:hover {
+    transform: scale(1.02);
+    opacity: .95;
+}
+#quorlyx_generate_post_now_button .dashicons,
+#quorlyx_generate_keywords_button .dashicons {
+    margin: 0 !important;
+}
+.postbox,
+#quorlyx-keyword-generator-wrap,
+#quorlyx-manual-post-generator-wrap {
+    margin-bottom: 15px !important;
+    padding: 15px !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+    background: #fff;
+}
+.ab-test-toggle-section {
+    padding: 15px !important;
+    border-radius: 8px;
+    background: #fff;
+    margin-bottom: 15px;
+}
+.form-table {
+    margin: 0;
+    max-width: 100%;
+}
+.form-table th,
+.form-table td {
+    padding: 8px 10px !important;
+}
+.toggle-label {
+    margin-left: 8px;
+    font-size: 14px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    vertical-align: middle;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #fff;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked+.slider {
+    background-color: #7c3aed;
+}
+input:focus+.slider {
+    box-shadow: 0 0 1px #7c3aed;
+}
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+.quorlyx-repeater-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #fdfdfd;
+    transition: border-color .3s ease;
+}
+.quorlyx-repeater-item-main {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+.quorlyx-repeater-item-controls {
+    flex-shrink: 0;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.quorlyx-add-repeater-item {
+    margin-top: 5px;
+}
+@media (max-width: 768px) {
+    .settings-main-area {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .settings-variation-wrap {
+        min-width: 0;
+    }
+    .quorlyx-settings-wrap {
+        padding: 10px;
+    }
+    .quorlyx-repeater-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .quorlyx-repeater-item-controls {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+}
+.quorlyx-tour-highlight {
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, .5);
+    position: relative;
+    z-index: 9999 !important;
+    border-radius: 4px;
+}
+
+
+/* Quorlyx Modern Tour UX Overrides */
+.quorlyx-modern-tour {
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.25), 0 4px 10px -4px rgba(0, 0, 0, 0.1) !important;
+    padding: 0 !important;
+    animation: quorlyxTourFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes quorlyxTourFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.quorlyx-modern-tour .wp-pointer-content {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    padding: 24px !important;
+    border: 1px solid rgba(0,0,0,0.06) !important;
+}
+.quorlyx-modern-tour h3 {
+    margin: 0 0 12px 0 !important;
+    font-size: 1.25em !important;
+    font-weight: 600 !important;
+    color: #1d2327 !important;
+    background: transparent !important;
+    line-height: 1.4 !important;
+    border-bottom: none !important;
+    padding: 0 !important;
+}
+.quorlyx-modern-tour h3::before {
+    content: ""\2728"";
+    margin-right: 8px;
+    display: inline-block;
+}
+.quorlyx-modern-tour p {
+    font-size: 14px !important;
+    color: #4b5563 !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+.quorlyx-modern-tour .wp-pointer-buttons {
+    padding: 0 !important;
+    margin-top: 20px !important;
+    background: transparent !important;
+    border: none !important;
+}
+.quorlyx-modern-tour .quorlyx-tour-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+.quorlyx-modern-tour .quorlyx-tour-buttons .close {
+    text-decoration: none;
+    color: #64748b !important;
+    font-weight: 500;
+    transition: color 0.15s ease;
+    font-size: 14px !important;
+}
+.quorlyx-modern-tour .quorlyx-tour-buttons .close:hover {
+    color: #1d2327 !important;
+}
+.quorlyx-modern-tour .quorlyx-tour-buttons button.button-primary {
+    background: #7c3aed !important;
+    border: 1px solid #7c3aed !important;
+    border-radius: 20px !important;
+    padding: 6px 24px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25) !important;
+    transition: transform 0.1s ease, filter 0.2s ease !important;
+    font-size: 14px !important;
+    text-shadow: none !important;
+}
+.quorlyx-modern-tour .quorlyx-tour-buttons button.button-primary:hover {
+    filter: brightness(110%) !important;
+    transform: translateY(-1px) !important;
+}
+.quorlyx-modern-tour .quorlyx-tour-buttons button.button-primary:active {
+    transform: scale(0.95) !important;
+}
+/* Recolor Pointer Arrows */
+.quorlyx-modern-tour.wp-pointer-top .wp-pointer-arrow, .quorlyx-modern-tour.wp-pointer-top .wp-pointer-arrow-inner { border-bottom-color: #ffffff !important; }
+.quorlyx-modern-tour.wp-pointer-bottom .wp-pointer-arrow, .quorlyx-modern-tour.wp-pointer-bottom .wp-pointer-arrow-inner { border-top-color: #ffffff !important; }
+.quorlyx-modern-tour.wp-pointer-left .wp-pointer-arrow, .quorlyx-modern-tour.wp-pointer-left .wp-pointer-arrow-inner { border-right-color: #ffffff !important; }
+.quorlyx-modern-tour.wp-pointer-right .wp-pointer-arrow, .quorlyx-modern-tour.wp-pointer-right .wp-pointer-arrow-inner { border-left-color: #ffffff !important; }
+
+/* Enforce brand color for tour primary action (Next/Finish). */
+.quorlyx-modern-tour .wp-pointer-content .quorlyx-tour-buttons button.button.button-primary,
+.quorlyx-modern-tour .quorlyx-tour-buttons button.button.button-primary {
+    background-color: #7c3aed !important;
+    border-color: #7c3aed !important;
+    color: #ffffff !important;
+}
+
+
+/* Shepherd Tour UX Enhancements */
+.quorlyx-shepherd-tour-modern {
+    background: #ffffff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 0 !important;
+    max-width: 400px;
+}
+.quorlyx-shepherd-tour-modern .shepherd-content {
+    padding: 0 !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-header {
+    background: #f8fafc !important;
+    padding: 1rem 1.25rem !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    border-radius: 8px 8px 0 0 !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-cancel-icon {
+    color: #64748b !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-cancel-icon:hover {
+    color: #0f172a !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-text {
+    padding: 1.25rem !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: #475569 !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-footer {
+    padding: 1rem 1.25rem !important;
+    border-top: 1px solid #e2e8f0 !important;
+    background: #f8fafc !important;
+    border-radius: 0 0 8px 8px !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-button {
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    border: none !important;
+    font-size: 13px !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-button-secondary {
+    background: #e2e8f0 !important;
+    color: #475569 !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-button-secondary:hover {
+    background: #cbd5e1 !important;
+    color: #1e293b !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-button-primary {
+    background: #7c3aed !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.2), 0 2px 4px -1px rgba(124, 58, 237, 0.1) !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-button-primary:hover {
+    background: #6d28d9 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 8px -1px rgba(124, 58, 237, 0.3), 0 4px 6px -1px rgba(124, 58, 237, 0.2) !important;
+}
+.quorlyx-shepherd-tour-modern .shepherd-arrow:before {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+
+ / *   Q u o r l y x   S h e p h e r d   T o u r   S t y l e s   * / 
+ . q u o r l y x - s h e p h e r d - t o u r - m o d e r n   { 
+         b a c k g r o u n d :   # f f f ; 
+         b o r d e r - r a d i u s :   8 p x ; 
+         b o x - s h a d o w :   0   4 p x   1 2 p x   r g b a ( 0 ,   0 ,   0 ,   0 . 1 5 ) ; 
+         p a d d i n g :   1 6 p x ; 
+         m a x - w i d t h :   4 0 0 p x ; 
+ } 
+ . q u o r l y x - s h e p h e r d - t o u r - m o d e r n   . s h e p h e r d - t i t l e   { 
+         f o n t - s i z e :   1 6 p x ; 
+         f o n t - w e i g h t :   6 0 0 ; 
+         m a r g i n - b o t t o m :   8 p x ; 
+ } 
+ . q u o r l y x - s h e p h e r d - t o u r - m o d e r n   . s h e p h e r d - t e x t   { 
+         f o n t - s i z e :   1 4 p x ; 
+         l i n e - h e i g h t :   1 . 5 ; 
+         c o l o r :   # 4 4 4 ; 
+ } 
+ . q u o r l y x - s h e p h e r d - t o u r - m o d e r n   . s h e p h e r d - f o o t e r   { 
+         d i s p l a y :   f l e x ; 
+         j u s t i f y - c o n t e n t :   f l e x - e n d ; 
+         g a p :   8 p x ; 
+         m a r g i n - t o p :   1 6 p x ; 
+ } 
+ . q u o r l y x - s h e p h e r d - t o u r - m o d e r n   . s h e p h e r d - b u t t o n   { 
+         c u r s o r :   p o i n t e r ; 
+         b o r d e r - r a d i u s :   4 p x ; 
+         p a d d i n g :   6 p x   1 6 p x ; 
+         f o n t - s i z e :   1 4 p x ; 
+         f o n t - w e i g h t :   5 0 0 ; 
+         t r a n s i t i o n :   a l l   0 . 2 s ; 
+ } 
+ . q u o r l y x - s h e p h e r d - t o u r - m o d e r n   . s h e p h e r d - b u t t o n - s e c o n d a r y   { 
+         b a c k g r o u n d :   t r a n s p a r e n t ; 
+         b o r d e r :   1 p x   s o l i d   # c c c ; 
+         c o l o r :   # 6 6 6 ; 
+ } 
+ . q u o r l y x - s h e p h e r d - t o u r - m o d e r n   . s h e p h e r d - b u t t o n - p r i m a r y   { 
+         b a c k g r o u n d :   # 7 c 3 a e d ; 
+         b o r d e r :   1 p x   s o l i d   # 7 c 3 a e d ; 
+         c o l o r :   # f f f ; 
+ } 
+ . q u o r l y x - s h e p h e r d - t o u r - m o d e r n   . s h e p h e r d - b u t t o n - p r i m a r y : h o v e r   { 
+         b a c k g r o u n d :   # 6 d 2 8 d 9 ; 
+         b o r d e r - c o l o r :   # 6 d 2 8 d 9 ; 
+ } 
+  
+ 
