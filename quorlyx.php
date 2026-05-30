@@ -1,7 +1,7 @@
 <?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName -- Main plugin bootstrap remains monolithic by design.
 /**
  * Plugin Name:       Quorlyx
- * Description:       Open-source AI behavior automation plugin for WordPress and WooCommerce.
+ * Description:       Free open-source AI chatbot and behavior automation plugin for WordPress and WooCommerce.
  * Version:           2.2.3
  * Author:            Quorlyx
  * Author URI:        https://quorlyx.dev
