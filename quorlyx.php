@@ -3738,7 +3738,7 @@ add_action( 'admin_menu', 'quorlyx_admin_menu' );
  * @return void
  */
 function quorlyx_admin_menu() {
-	add_menu_page( 'Quorlyx Pro Dashboard', 'Quorlyx Pro', quorlyx_admin_capability(), 'quorlyx-dashboard', 'quorlyx_pro_render_dashboard', quorlyx_get_plugin_asset_url( 'assets/logo1.png' ), 6 );
+	add_menu_page( 'Quorlyx Dashboard', 'Quorlyx', quorlyx_admin_capability(), 'quorlyx-dashboard', 'quorlyx_pro_render_dashboard', quorlyx_get_plugin_asset_url( 'assets/logo1.png' ), 6 );
 	add_submenu_page( 'quorlyx-dashboard', 'Dashboard', 'Dashboard', quorlyx_admin_capability(), 'quorlyx-dashboard', 'quorlyx_pro_render_dashboard' );
 	add_submenu_page( 'quorlyx-dashboard', 'Content Insights', 'Content Insights', quorlyx_admin_capability(), 'quorlyx-content-insights', 'quorlyx_render_content_insights_page' );
 	add_submenu_page( 'quorlyx-dashboard', 'Submissions', 'Submissions', quorlyx_admin_capability(), 'edit.php?post_type=quorlyx_submission' );
@@ -29885,7 +29885,7 @@ function quorlyx_pro_guide_fallback_answer( $question, $snapshot, $findings ) {
 		$answer_lines = array(
 			'Here is the fastest way to connect WooCommerce with Quorlyx:',
 			'1) Install and activate WooCommerce in WordPress.',
-			'2) In Quorlyx Pro, go to Settings â†’ Chatbot and configure Variation A provider API key + model.',
+			'2) In Quorlyx, go to Settings â†’ Chatbot and configure Variation A provider API key + model.',
 			'3) Keep chat enabled for Variation A and save settings.',
 			'4) Add product-focused persona/knowledge instructions so answers can reference products.',
 			'5) Test on a product page and then review the Logs tab for warnings/errors.',
@@ -31092,7 +31092,7 @@ function quorlyx_rest_guide_chat( WP_REST_Request $request ) {
 			'6) Include a short "Technical Checks" section based on findings.',
 			'7) This is admin-only support. Do not suggest public-site chat UI changes.',
 		);
-		$system_prompt = 'You are Quorlyx Pro admin setup assistant. Give clear, deep, actionable steps and handle follow-up clarification requests precisely.';
+		$system_prompt = 'You are the Quorlyx admin setup assistant. Give clear, deep, actionable steps and handle follow-up clarification requests precisely.';
 
 		$history = array_merge(
 			array(
@@ -31537,7 +31537,7 @@ function quorlyx_rest_content_insight_suggestion( WP_REST_Request $request ) {
 		$heuristics[] = '- ' . sanitize_text_field( (string) ( $recommendation['label'] ?? '' ) ) . ': ' . sanitize_text_field( (string) ( $recommendation['details'] ?? '' ) );
 	}
 
-	$system_prompt = 'You are Quorlyx Pro Content Insights strategist. Recommend only actions that can actually be configured inside Quorlyx. Map each suggestion to exact Quorlyx areas such as Settings > Chatbot > Triggers, Settings > Chatbot > Variation A, Settings > Chatbot > Variation B, SEO & Content Tools, or Content Insights tracking rules. Use both the metrics and the actual page content. If an action family is marked as forbidden, never recommend it.';
+	$system_prompt = 'You are the Quorlyx Content Insights strategist. Recommend only actions that can actually be configured inside Quorlyx. Map each suggestion to exact Quorlyx areas such as Settings > Chatbot > Triggers, Settings > Chatbot > Variation A, Settings > Chatbot > Variation B, SEO & Content Tools, or Content Insights tracking rules. Use both the metrics and the actual page content. If an action family is marked as forbidden, never recommend it.';
 	$prompt_lines  = array(
 		$feature_context,
 		'',

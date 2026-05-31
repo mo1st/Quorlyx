@@ -17,7 +17,7 @@ Before you leave {product_name}, try this: {ai_help_offer}
 Rendered example:
 
 ```text
-Before you leave Quorlyx Pro, try this: ask me about setup, pricing, or the best next step.
+Before you leave Quorlyx, try this: ask me about setup, configuration, or the best next step.
 ```
 
 ## Goals

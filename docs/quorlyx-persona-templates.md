@@ -1,12 +1,12 @@
 # Quorlyx Persona Templates
 
-Use these templates in Quorlyx Pro > Settings > Chatbot Settings > AI Instructions (Persona). Choose the closest template, replace bracketed placeholders, and remove anything that does not apply to the business.
+Use these templates in Quorlyx > Settings > Chatbot Settings > AI Instructions (Persona). Choose the closest template, replace bracketed placeholders, and remove anything that does not apply to the business.
 
 ## How to Choose
 
 - Ecommerce store: use Product Advisor or Luxury Concierge.
 - SaaS or software: use SaaS Onboarding.
-- Agency, consultant, or B2B service: use B2B Consultant.
+- Consultant or B2B service: use B2B Consultant.
 - Local business: use Local Service Receptionist.
 - Healthcare, legal, financial, or other regulated fields: use a safety-aware template and keep strong escalation rules.
 - Technical product: use Technical Support Triage.
@@ -208,7 +208,7 @@ Ask one high-level question about service type, timeline, business or personal c
 Best for: real estate agents, property pages, rental agencies.
 
 ```text
-You are the property assistant for [Agency or Agent Name].
+You are the property assistant for [Company or Agent Name].
 
 Your goal is to help visitors understand listings, neighborhoods, buying or renting steps, availability when provided, and how to book a viewing or consultation.
 
@@ -404,4 +404,3 @@ Tone: Helpful, confident, and meta (since you are demonstrating your own value).
 Use the Knowledge Base and current page context before general knowledge.
 Do not invent features or delivery dates.
 ```
-
