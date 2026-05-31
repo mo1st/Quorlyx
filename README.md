@@ -54,64 +54,64 @@ GitHub can fail to inline very large animated GIFs on slow connections, so the R
 
 ### Dashboard
 
-<a href="https://github.com/mo1st/Quorlyx/raw/main/docs/media/dashboard.gif">
-  <img src="https://github.com/mo1st/Quorlyx/raw/main/docs/media/previews/dashboard.png" alt="Quorlyx dashboard showing analytics and plugin overview" width="100%">
+<a href="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/dashboard.gif">
+  <img src="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/previews/dashboard.png" alt="Quorlyx dashboard showing analytics and plugin overview" width="100%">
 </a>
 
-[Open animated Dashboard GIF](https://github.com/mo1st/Quorlyx/raw/main/docs/media/dashboard.gif)
+[Open animated Dashboard GIF](https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/dashboard.gif)
 
 ### Chat
 
-<a href="https://github.com/mo1st/Quorlyx/raw/main/docs/media/chat.gif">
-  <img src="https://github.com/mo1st/Quorlyx/raw/main/docs/media/previews/chat.png" alt="Quorlyx chat settings and chatbot workflow" width="100%">
+<a href="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/chat.gif">
+  <img src="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/previews/chat.png" alt="Quorlyx chat settings and chatbot workflow" width="100%">
 </a>
 
-[Open animated Chat GIF](https://github.com/mo1st/Quorlyx/raw/main/docs/media/chat.gif)
+[Open animated Chat GIF](https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/chat.gif)
 
 ### Behavior Triggers
 
-<a href="https://github.com/mo1st/Quorlyx/raw/main/docs/media/triggers.gif">
-  <img src="https://github.com/mo1st/Quorlyx/raw/main/docs/media/previews/triggers.png" alt="Quorlyx behavior trigger configuration" width="100%">
+<a href="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/triggers.gif">
+  <img src="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/previews/triggers.png" alt="Quorlyx behavior trigger configuration" width="100%">
 </a>
 
-[Open animated Triggers GIF](https://github.com/mo1st/Quorlyx/raw/main/docs/media/triggers.gif)
+[Open animated Triggers GIF](https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/triggers.gif)
 
 ### Content Insights
 
-<a href="https://github.com/mo1st/Quorlyx/raw/main/docs/media/content-insights.gif">
-  <img src="https://github.com/mo1st/Quorlyx/raw/main/docs/media/previews/content-insights.png" alt="Quorlyx content insights dashboard" width="100%">
+<a href="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/content-insights.gif">
+  <img src="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/previews/content-insights.png" alt="Quorlyx content insights dashboard" width="100%">
 </a>
 
-[Open animated Content Insights GIF](https://github.com/mo1st/Quorlyx/raw/main/docs/media/content-insights.gif)
+[Open animated Content Insights GIF](https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/content-insights.gif)
 
 ### Conversion Goals
 
-<a href="https://github.com/mo1st/Quorlyx/raw/main/docs/media/goals.gif">
-  <img src="https://github.com/mo1st/Quorlyx/raw/main/docs/media/previews/goals.png" alt="Quorlyx conversion goals configuration" width="100%">
+<a href="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/goals.gif">
+  <img src="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/previews/goals.png" alt="Quorlyx conversion goals configuration" width="100%">
 </a>
 
-[Open animated Conversion Goals GIF](https://github.com/mo1st/Quorlyx/raw/main/docs/media/goals.gif)
+[Open animated Conversion Goals GIF](https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/goals.gif)
 
 ### Cost Controls
 
-<a href="https://github.com/mo1st/Quorlyx/raw/main/docs/media/cost-controls.gif">
-  <img src="https://github.com/mo1st/Quorlyx/raw/main/docs/media/previews/cost-controls.png" alt="Quorlyx AI cost controls and model routing" width="100%">
+<a href="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/cost-controls.gif">
+  <img src="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/previews/cost-controls.png" alt="Quorlyx AI cost controls and model routing" width="100%">
 </a>
 
-[Open animated Cost Controls GIF](https://github.com/mo1st/Quorlyx/raw/main/docs/media/cost-controls.gif)
+[Open animated Cost Controls GIF](https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/cost-controls.gif)
 
 ### SEO Tools
 
-<a href="https://github.com/mo1st/Quorlyx/raw/main/docs/media/seo.gif">
-  <img src="https://github.com/mo1st/Quorlyx/raw/main/docs/media/previews/seo.png" alt="Quorlyx SEO and AI content tools" width="100%">
+<a href="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/seo.gif">
+  <img src="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/previews/seo.png" alt="Quorlyx SEO and AI content tools" width="100%">
 </a>
 
-[Open animated SEO Tools GIF](https://github.com/mo1st/Quorlyx/raw/main/docs/media/seo.gif)
+[Open animated SEO Tools GIF](https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/seo.gif)
 
 ### Logs And Diagnostics
 
-<a href="https://github.com/mo1st/Quorlyx/raw/main/docs/media/logs-diagnostics.png">
-  <img src="https://github.com/mo1st/Quorlyx/raw/main/docs/media/logs-diagnostics.png" alt="Quorlyx logs and diagnostics screen" width="100%">
+<a href="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/logs-diagnostics.png">
+  <img src="https://github.com/mo1st/Quorlyx/raw/7a8443afac2b5c0cb3801ef17f845d2612bf9fe3/docs/media/logs-diagnostics.png" alt="Quorlyx logs and diagnostics screen" width="100%">
 </a>
 
 ## Feature Map
