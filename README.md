@@ -2,9 +2,16 @@
 
 Free open-source AI chatbot and behavior automation plugin for WordPress and WooCommerce.
 
+[![GitHub stars](https://img.shields.io/github/stars/mo1st/Quorlyx?style=social)](https://github.com/mo1st/Quorlyx/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/mo1st/Quorlyx?style=social)](https://github.com/mo1st/Quorlyx/forks)
+[![License: GPL-2.0-or-later](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![WordPress + WooCommerce](https://img.shields.io/badge/WordPress-WooCommerce-blue)](https://wordpress.org/plugins/quorlyx/)
+
 Quorlyx helps WordPress sites turn visitor behavior into useful AI-powered actions. Instead of showing the same static chatbot to every visitor, Quorlyx can react to what people are doing on the site: the page they are reading, the product they are viewing, how far they scroll, whether they are returning, whether they are close to leaving, what they click, what is in the cart, and how they move through a WooCommerce store.
 
 [Download on GitHub](https://github.com/mo1st/Quorlyx/) | [WordPress Marketplace](https://wordpress.org/plugins/quorlyx/) | [Website](https://quorlyx.dev) | [Community Support](https://discord.gg/ZTu6XFUZD)
+
+If Quorlyx helps you build a smarter WordPress or WooCommerce site, a GitHub star helps more developers discover the project and shows which open-source work is worth improving next.
 
 ## GitHub Description
 
@@ -393,6 +400,17 @@ Quorlyx is also a portfolio-grade engineering example. It demonstrates:
 - Security-minded open-source positioning: no committed secrets, no hidden install/domain tracking, and public issue-based support.
 - Practical product judgment: the plugin is free, inspectable, and community-driven instead of locked behind a closed SaaS layer.
 
+## Star And Share
+
+The most useful way to support Quorlyx is to give the repository a star and share the specific workflow that made it useful.
+
+- Star the repository: https://github.com/mo1st/Quorlyx
+- Share a short use case: "I am testing Quorlyx for WooCommerce cart recovery / behavior triggers / AI Knowledge Base chat."
+- Open an issue when something is unclear, broken, or worth improving.
+- Share the project with WordPress developers, WooCommerce store owners, agencies, and marketplace builders.
+
+Copy-paste posts are available in [Share Quorlyx](docs/share-quorlyx.md).
+
 ## Included
 
 - Main plugin bootstrap: `quorlyx.php`
@@ -414,6 +432,7 @@ Quorlyx is also a portfolio-grade engineering example. It demonstrates:
 - [Roadmap](ROADMAP.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security](SECURITY.md)
+- [Share Quorlyx](docs/share-quorlyx.md)
 - [Knowledge Base docs](docs/quorlyx-knowledge.md)
 - [Knowledge Base upload docs](docs/quorlyx-knowledge-base-upload.md)
 - [Persona templates](docs/quorlyx-persona-templates.md)
