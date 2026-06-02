@@ -418,6 +418,28 @@ Copy-paste posts are available in [Share Quorlyx](docs/share-quorlyx.md).
 - Public docs: `docs/`
 - Optional includes: `includes/`
 
+## Development And Build Checks
+
+Install local development tools:
+
+```bash
+composer install
+```
+
+Run PHP standards checks:
+
+```bash
+composer lint:php
+```
+
+Apply PHPCS autofixes only after reviewing the expected diff:
+
+```bash
+composer lint:php:fix
+```
+
+Quorlyx keeps human-readable source assets in `assets/` and third-party vendor source packages in `dist/vendor/`. Distribution-ready assets live in `dist/`. When changing generated or minified assets, keep the matching human-readable source beside the distribution file and document any build command needed to reproduce it.
+
 ## Excluded From This Release Copy
 
 - `node_modules/`

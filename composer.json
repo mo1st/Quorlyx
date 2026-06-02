@@ -1,0 +1,21 @@
+{
+  "name": "quorlyx/quorlyx",
+  "description": "Free open-source AI chatbot and behavior automation plugin for WordPress and WooCommerce.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.1",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "wp-coding-standards/wpcs": "^3.2"
+  },
+  "scripts": {
+    "lint:php": "php -d memory_limit=1G vendor/bin/phpcs",
+    "lint:php:fix": "php -d memory_limit=1G vendor/bin/phpcbf"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "sort-packages": true
+  }
+}
