@@ -452,8 +452,10 @@ Quorlyx keeps human-readable source assets in `assets/` and third-party vendor s
 ## Project Docs
 
 - [Roadmap](ROADMAP.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security](SECURITY.md)
+- [License](LICENSE)
 - [Share Quorlyx](docs/share-quorlyx.md)
 - [Knowledge Base docs](docs/quorlyx-knowledge.md)
 - [Knowledge Base upload docs](docs/quorlyx-knowledge-base-upload.md)
