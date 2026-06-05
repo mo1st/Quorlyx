@@ -20160,6 +20160,22 @@ function quorlyx_add_trigger_controller_script() {
 				} catch ( e ) {}
 			},
 
+			getSecureRandomSuffix: function() {
+				try {
+					const cryptoObj = window.crypto || window.msCrypto;
+					if ( cryptoObj && typeof cryptoObj.randomUUID === 'function' ) {
+						return cryptoObj.randomUUID().replace( /-/g, '' );
+					}
+					if ( cryptoObj && typeof cryptoObj.getRandomValues === 'function' && typeof Uint32Array !== 'undefined' ) {
+						return Array.from( cryptoObj.getRandomValues( new Uint32Array( 4 ) ) )
+							.map( ( value ) => value.toString( 36 ) )
+							.join( '' );
+					}
+				} catch ( e ) {}
+
+				return String( Date.now() );
+			},
+
 			getSessionScopeId: function() {
 				const key = 'quorlyx_trigger_session_scope_v3';
 				try {
@@ -20168,7 +20184,7 @@ function quorlyx_add_trigger_controller_script() {
 						return String( value );
 					}
 
-					value = 'qts_' + String( Date.now() ) + '_' + String( Math.floor( Math.random() * 1000000000 ) );
+					value = 'qts_' + String( Date.now() ) + '_' + this.getSecureRandomSuffix();
 					sessionStorage.setItem( key, value );
 					return value;
 				} catch ( e ) {
@@ -20177,7 +20193,7 @@ function quorlyx_add_trigger_controller_script() {
 						return String( cookieValue );
 					}
 
-					const fallback = 'qtc_' + String( Date.now() ) + '_' + String( Math.floor( Math.random() * 1000000000 ) );
+					const fallback = 'qtc_' + String( Date.now() ) + '_' + this.getSecureRandomSuffix();
 					this.setCookie( key, fallback );
 					return fallback;
 				}
@@ -24119,14 +24135,20 @@ function quorlyx_enqueue_admin_scripts( $hook ) {
 			});
 			toggleTriggerAbScopeFields();
 
-            $('#quorlyx-add-trigger').on('click', function() {
+			$('#quorlyx-add-trigger').on('click', function() {
                 const container = $('#quorlyx-triggers-container');
                 const template = $('#quorlyx-trigger-template').html();
                 const index = new Date().getTime(); // Unique index
                 const newItem = $(template.replace(/__INDEX__/g, index));
-				const randomPart = window.crypto && window.crypto.getRandomValues
-					? Array.from(window.crypto.getRandomValues(new Uint32Array(2))).map((value) => value.toString(36)).join('')
-					: Math.random().toString(36).slice(2, 12);
+				const cryptoObj = window.crypto || window.msCrypto;
+				let randomPart = String(index);
+				try {
+					if (cryptoObj && typeof cryptoObj.randomUUID === 'function') {
+						randomPart = cryptoObj.randomUUID().replace(/-/g, '');
+					} else if (cryptoObj && typeof cryptoObj.getRandomValues === 'function' && typeof Uint32Array !== 'undefined') {
+						randomPart = Array.from(cryptoObj.getRandomValues(new Uint32Array(2))).map((value) => value.toString(36)).join('');
+					}
+				} catch (e) {}
 
 				newItem.find('input[type=hidden]').filter(function() {
 					return this.name && this.name.endsWith('[id]');

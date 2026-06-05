@@ -105,14 +105,35 @@
 		}
 	}
 
+	var randomFallbackCounter = 0;
+
+	function generateRandomSuffix() {
+		var cryptoObj = window.crypto || window.msCrypto;
+		if (cryptoObj && typeof cryptoObj.randomUUID === 'function') {
+			return cryptoObj.randomUUID().replace(/-/g, '');
+		}
+
+		if (cryptoObj && typeof cryptoObj.getRandomValues === 'function' && typeof Uint32Array !== 'undefined') {
+			var values = cryptoObj.getRandomValues(new Uint32Array(4));
+			var parts = [];
+			for (var i = 0; i < values.length; i++) {
+				parts.push(values[i].toString(36));
+			}
+			return parts.join('');
+		}
+
+		randomFallbackCounter += 1;
+		return String(Date.now()) + '_' + String(randomFallbackCounter);
+	}
+
 	function generateProfileId() {
-		return 'qbx_' + String(Date.now()) + '_' + String(Math.floor(Math.random() * 1000000000));
+		return 'qbx_' + String(Date.now()) + '_' + generateRandomSuffix();
 	}
 
 	function getSessionId() {
 		var sid = readSessionValue(sessionIdKey);
 		if (!sid) {
-			sid = 'sess_' + String(Date.now()) + '_' + String(Math.floor(Math.random() * 1000000000));
+			sid = 'sess_' + String(Date.now()) + '_' + generateRandomSuffix();
 			writeSessionValue(sessionIdKey, sid);
 		}
 		return sid;
