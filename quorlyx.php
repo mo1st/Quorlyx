@@ -1664,6 +1664,7 @@ Follow these rules strictly:
 			'grok'      => '',
 			'mistral'   => '',
 			'deepseek'  => '',
+			'demonroute' => '',
 		),
 		'ai_model'                                 => '', // No default model - admin must choose.
 		'ai_temperature'                           => '0.7',
@@ -12896,7 +12897,7 @@ function quorlyx_merge_global_options( $options ) {
 	$defaults              = quorlyx_get_global_defaults();
 	$raw                   = is_array( $options ) ? $options : array();
 	$merged                = array_replace_recursive( $defaults, $raw );
-	$allowed_provider_keys = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek' );
+	$allowed_provider_keys = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek', 'demonroute' );
 
 	foreach ( array( 'variation_a', 'variation_b' ) as $variation_key ) {
 		if (
@@ -15101,6 +15102,7 @@ function quorlyx_render_content_engine_settings( $opts ) {
 									'grok'      => 'Grok (xAI)',
 									'mistral'   => 'Mistral',
 									'deepseek'  => 'DeepSeek',
+									'demonroute' => 'Demon Route',
 								);
 								foreach ( $providers as $k => $v ) {
 									echo '<option value="' . esc_attr( $k ) . '" ' . selected( ( $pg_opts['ai_provider'] ?? 'gemini' ), $k, false ) . '>' . esc_html( $v ) . '</option>';
@@ -16030,6 +16032,7 @@ function quorlyx_render_variation_fields( $variation, $opts, $title = '' ) {
 						'grok'      => 'Grok (xAI)',
 						'mistral'   => 'Mistral',
 						'deepseek'  => 'DeepSeek',
+						'demonroute' => 'Demon Route',
 					);
 					foreach ( $providers as $k => $v ) {
 						echo '<option value="' . esc_attr( $k ) . '" ' . selected( $opts['ai_provider'], $k, false ) . '>' . esc_html( $v ) . '</option>';
@@ -16037,7 +16040,7 @@ function quorlyx_render_variation_fields( $variation, $opts, $title = '' ) {
 					?>
 				</select>
 					<div class="api-key-wrapper" data-variation="<?php echo esc_attr( $variation ); ?>">
-					<?php foreach ( array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek' ) as $provider ) : ?>
+					<?php foreach ( array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek', 'demonroute' ) as $provider ) : ?>
 							<?php $masked_provider_key = quorlyx_mask_secret_for_display( (string) ( $opts['api_keys'][ $provider ] ?? '' ) ); ?>
 							<div class="api-key-input" data-provider="<?php echo esc_attr( $provider ); ?>">
 							<label><strong><?php echo esc_html( ucfirst( $provider ) ); ?> API Key:</strong></label>
@@ -16907,6 +16910,7 @@ function quorlyx_render_global_fields( $opts ) {
 					'grok'      => 'Grok',
 					'mistral'   => 'Mistral',
 					'deepseek'  => 'DeepSeek',
+					'demonroute' => 'Demon Route',
 				);
 				foreach ( $providers as $k => $label ) {
 					echo '<option value="' . esc_attr( $k ) . '" ' . selected( $perf['model_routing_provider'], $k, false ) . '>' . esc_html( $label ) . '</option>';
@@ -16973,6 +16977,7 @@ function quorlyx_render_global_fields( $opts ) {
 					'grok'      => 'Grok',
 					'mistral'   => 'Mistral',
 					'deepseek'  => 'DeepSeek',
+					'demonroute' => 'Demon Route',
 				);
 				foreach ( $providers as $k => $label ) {
 					echo '<option value="' . esc_attr( $k ) . '" ' . selected( $perf['fallback_provider'], $k, false ) . '>' . esc_html( $label ) . '</option>';
@@ -18280,7 +18285,7 @@ function quorlyx_sanitize_options( $input ) {
 		$san_pg['post_status']   = in_array( ( $pg_in['post_status'] ?? $san_pg['post_status'] ), array( 'draft', 'publish' ), true ) ? $pg_in['post_status'] : $san_pg['post_status'];
 
 		$san_pg['ai_provider_scope'] = in_array( ( $pg_in['ai_provider_scope'] ?? 'general' ), array( 'general', 'independent' ), true ) ? $pg_in['ai_provider_scope'] : 'general';
-		$allowed_pg_providers        = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek' );
+		$allowed_pg_providers        = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek', 'demonroute' );
 		$raw_pg_provider             = sanitize_key( $pg_in['ai_provider'] ?? $san_pg['ai_provider'] );
 		if ( ! in_array( $raw_pg_provider, $allowed_pg_providers, true ) ) {
 			$raw_pg_provider = 'gemini';
@@ -18344,7 +18349,7 @@ function quorlyx_sanitize_options( $input ) {
 		$perf['local_greeting_enabled']        = ! empty( $perf_in['local_greeting_enabled'] );
 
 		$perf['model_routing_enabled']           = ! empty( $perf_in['model_routing_enabled'] );
-		$allowed_routing_providers               = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek' );
+		$allowed_routing_providers               = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek', 'demonroute' );
 		$raw_routing_provider                    = sanitize_key( $perf_in['model_routing_provider'] ?? $perf['model_routing_provider'] );
 		$perf['model_routing_provider']          = in_array( $raw_routing_provider, $allowed_routing_providers, true ) ? $raw_routing_provider : '';
 		$perf['model_routing_model']             = sanitize_text_field( $perf_in['model_routing_model'] ?? $perf['model_routing_model'] );
@@ -18362,7 +18367,7 @@ function quorlyx_sanitize_options( $input ) {
 		}
 
 		$perf['fallback_enabled']          = ! empty( $perf_in['fallback_enabled'] );
-		$allowed_fallback_providers        = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek' );
+		$allowed_fallback_providers        = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek', 'demonroute' );
 		$raw_fallback_provider             = sanitize_key( $perf_in['fallback_provider'] ?? $perf['fallback_provider'] );
 		$perf['fallback_provider']         = in_array( $raw_fallback_provider, $allowed_fallback_providers, true ) ? $raw_fallback_provider : '';
 		$perf['fallback_model']            = sanitize_text_field( $perf_in['fallback_model'] ?? $perf['fallback_model'] );
@@ -18557,7 +18562,7 @@ function quorlyx_sanitize_options( $input ) {
 			$sanitized_v                 = array();
 			$sanitized_v['chat_enabled'] = ! empty( $variation_input['chat_enabled'] );
 
-			$allowed_variation_providers = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek' );
+			$allowed_variation_providers = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek', 'demonroute' );
 			$raw_variation_provider      = sanitize_key( $variation_input['ai_provider'] ?? $fallback['ai_provider'] );
 			$sanitized_v['ai_provider']  = in_array( $raw_variation_provider, $allowed_variation_providers, true ) ? $raw_variation_provider : 'gemini';
 			$sanitized_v['api_keys']     = array(
@@ -18567,6 +18572,7 @@ function quorlyx_sanitize_options( $input ) {
 				'grok'      => '',
 				'mistral'   => '',
 				'deepseek'  => '',
+				'demonroute' => '',
 			);
 			$existing_api_keys           = isset( $fallback['api_keys'] ) && is_array( $fallback['api_keys'] ) ? $fallback['api_keys'] : array();
 			$submitted_api_keys          = isset( $variation_input['api_keys'] ) && is_array( $variation_input['api_keys'] ) ? $variation_input['api_keys'] : array();
@@ -26153,7 +26159,7 @@ function quorlyx_rest_generate_trigger_message( WP_REST_Request $request ) {
 		return new WP_Error( 'chat_disabled', 'Chat is currently disabled.', array( 'status' => 403 ) );
 	}
 
-	$allowed_providers = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek' );
+	$allowed_providers = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek', 'demonroute' );
 	$provider          = sanitize_key( $variation['ai_provider'] ?? 'gemini' );
 	if ( ! in_array( $provider, $allowed_providers, true ) ) {
 		$provider = 'gemini';
@@ -27291,6 +27297,34 @@ function quorlyx_rest_fetch_models( WP_REST_Request $request ) {
 				);
 				if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) >= 400 ) {
 					throw new Exception( 'DeepSeek API request failed.' );
+				}
+
+				$body = json_decode( wp_remote_retrieve_body( $response ), true );
+				if ( isset( $body['data'] ) ) {
+					foreach ( $body['data'] as $model ) {
+						$models[] = array(
+							'id'   => $model['id'],
+							'name' => $model['id'],
+						);
+					}
+				}
+				if ( empty( $models ) ) {
+					$fallback = true;
+				}
+				break;
+
+			case 'demonroute':
+				$response = wp_remote_get(
+					'https://api.demonroute.com/v1/models',
+					array(
+						'headers' => array(
+							'Authorization' => 'Bearer ' . $api_key,
+						),
+						'timeout' => QUORLYX_API_TIMEOUT,
+					)
+				);
+				if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) >= 400 ) {
+					throw new Exception( 'Demon Route API request failed.' );
 				}
 
 				$body = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -28663,7 +28697,7 @@ function quorlyx_proxy_handler( WP_REST_Request $request ) {
 	$using_fallback            = false;
 
 	if ( $fallback_enabled ) {
-		$allowed_fallback_providers = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek' );
+		$allowed_fallback_providers = array( 'gemini', 'openai', 'anthropic', 'grok', 'mistral', 'deepseek', 'demonroute' );
 		$raw_fallback_provider      = sanitize_key( $perf['fallback_provider'] ?? '' );
 		if ( in_array( $raw_fallback_provider, $allowed_fallback_providers, true ) ) {
 			$fallback_provider         = $raw_fallback_provider;
@@ -34233,6 +34267,17 @@ function quorlyx_call_ai_api( $provider, $api_key, $model, $system_prompt, $hist
 					'temperature' => $temp,
 				);
 				break;
+			case 'demonroute':
+				$url = 'https://api.demonroute.com/v1/chat/completions';
+
+				$headers['Authorization'] = 'Bearer ' . $api_key;
+
+				$body = array(
+					'model'       => $model,
+					'messages'    => quorlyx_format_history_for_openai( $history, $system_prompt ),
+					'temperature' => $temp,
+				);
+				break;
 			default:
 				return new WP_Error( 'unsupported_provider', 'Unsupported provider.' );
 		}
@@ -34275,6 +34320,7 @@ function quorlyx_call_ai_api( $provider, $api_key, $model, $system_prompt, $hist
 			case 'grok':
 			case 'mistral':
 			case 'deepseek':
+			case 'demonroute':
 				return $response_body['choices'][0]['message']['content'] ?? '';
 			case 'anthropic':
 				return $response_body['content'][0]['text'] ?? '';
